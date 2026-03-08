@@ -1,131 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Custom PreHead code is injected here -->
-    
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta charset="utf-8"/>
 
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name ="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta charset="utf-8"/>
+<meta http-equiv="pragma" content="no-cache"/>
 
-        <!-- Builtin injector for disabling cache -->
-        <meta http-equiv="pragma" content="no-cache"/>
+<title>CodeLingo</title>
 
-        <!-- Set the title bar of the page -->
-        <title>CodeLingo</title>
+<style>
 
-        <!-- Custom PreStyle code is injected here -->
-        
+html, body{
+    height:100%;
+}
 
-        <!-- Set the background colour of the document -->
-        <style>
-            body {
-                background: #0;
-                color: #cccccc;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
-            }
+body{
+    margin:0;
+    padding:0;
 
-            canvas {
-                image-rendering: optimizeSpeed;
-                -webkit-interpolation-mode: nearest-neighbor;
-                -ms-touch-action: none;
-                touch-action: none;
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
-            }
-            :-webkit-full-screen #canvas {
-                width: 100%;
-                height: 100%;
-            }
-            :-webkit-full-screen {
-                width: 100%;
-                height: 100%;
-            }
-            
-            /* Custom Runner Styles */
-            div.gm4html5_div_class {
-                margin: 0px;
-                padding: 0px;
-                border: 0px;
-            }
-            div.gm4html5_login {
-                padding: 20px;
-                position: absolute;
-                border: solid 2px #000000;
-                background-color: #404040;
-                color:#00ff00;
-                border-radius: 15px;
-                box-shadow: #101010 20px 20px 40px;
-            }
-            div.gm4html5_cancel_button {
-                float: right;
-            }
-            div.gm4html5_login_button {
-                float: left;
-            }
-            div.gm4html5_login_header {
-                text-align: center;
-            }
-            /* END - Custom Runner Styles */
-            
-        </style>
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-        <!-- Custom PostStyle code is injected here -->
-        
+    font-family:Arial;
 
-        <!-- Builtin injector for injecting flurry analytics code -->
-        
-    </head>
+    /* красивый фон */
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    background-size:400% 400%;
+    animation:gradientMove 15s ease infinite;
+}
 
-    <!-- Custom PostHead code is injected here -->
-    
+/* анимация фона */
+@keyframes gradientMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
 
-    <!-- Custom PreBody code is injected here -->
-    
+#canvas{
 
-    <body>
-        <!-- Custom BodyStart code is injected here -->
-        
+    /* увеличенный канвас */
+    width:90vw;
+    height:auto;
+    max-width:1600px;
 
-        <div class="gm4html5_div_class" id="gm4html5_div_id">
-            
-            <!-- Builtin injector for splash screen -->
-            
+    image-rendering: optimizeSpeed;
+    -webkit-interpolation-mode: nearest-neighbor;
 
-            <!-- Custom PreCanvas code is injected here -->
-            
+    border-radius:16px;
 
-            <!-- Create the canvas element the game draws to -->
-            <canvas id="canvas" width="1280" height="720" style="position: absolute; top: 50%; left: 50%; bottom: -50%; right: -50%; transform: translate(-50%, -50%);">
-                
-                <p>Your browser doesn't support HTML5 canvas.</p>
-            </canvas>
-            
-            <!-- Custom PostCanvas code is injected here -->
-            
-        </div>
+    /* красивая рамка */
+    border:4px solid rgba(255,255,255,0.1);
 
-        <!-- Run the game code -->
-        <script type="text/javascript" src="html5game/CodeLingo(DEMO).js?cachebust=111298065"></script>
+    /* тень */
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.6),
+        inset 0 0 30px rgba(255,255,255,0.05);
+}
 
-        <!-- Builtin injector for injecting runner path -->
-        
+/* контейнер GameMaker */
+div.gm4html5_div_class{
+    margin:0;
+    padding:0;
+    border:0;
+}
 
-        <script>window.onload = GameMaker_Init;</script>
+div.gm4html5_login{
+    padding:20px;
+    position:absolute;
+    border:solid 2px #000000;
+    background-color:#404040;
+    color:#00ff00;
+    border-radius:15px;
+    box-shadow:#101010 20px 20px 40px;
+}
 
-        <!-- Builtin injector for injecting google analytics code -->
-        
+</style>
 
-        <!-- Custom BodyEnd code is injected here -->
-        
-    </body>
+</head>
 
-    <!-- Custom PostBody code is injected here -->
-    
+<body>
+
+<div class="gm4html5_div_class" id="gm4html5_div_id">
+
+<canvas id="canvas" width="1280" height="720">
+
+<p>Your browser doesn't support HTML5 canvas.</p>
+
+</canvas>
+
+</div>
+
+<script src="html5game/CodeLingo(DEMO).js?cachebust=111298065"></script>
+
+<script>
+window.onload = GameMaker_Init;
+</script>
+
+</body>
+
 </html>
