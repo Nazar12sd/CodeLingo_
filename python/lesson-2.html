@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Lingo - Урок 2: Змінні і типи даних</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0f2c 0%, #1a1f4b 50%, #0f1535 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        header {
+            background: rgba(15, 26, 70, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+        .header-btn {
+            padding: 10px 20px;
+            background: rgba(0, 102, 204, 0.2);
+            border: 1px solid rgba(0, 102, 204, 0.4);
+            border-radius: 8px;
+            color: #8899cc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .header-btn:hover {
+            background: rgba(0, 102, 204, 0.4);
+            color: #00b4ff;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .breadcrumb {
+            color: #8899cc;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .lesson-content {
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 24px;
+            color: #00b4ff;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+        h2:first-child {
+            margin-top: 0;
+        }
+        p {
+            color: #8899cc;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .code-block code {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00b4ff;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .info-box {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #22c55e;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #86efac;
+        }
+        ul, ol {
+            margin: 20px 0 20px 30px;
+            color: #8899cc;
+        }
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+        .btn-secondary {
+            background: rgba(0, 102, 204, 0.2);
+            border: 1px solid rgba(0, 102, 204, 0.4);
+            color: #8899cc;
+        }
+        .btn-secondary:hover {
+            background: rgba(0, 102, 204, 0.4);
+            color: #00b4ff;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            .lesson-content {
+                padding: 20px;
+            }
+            .buttons {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-header" onclick="window.location.href='../index.html'">Code Lingo</div>
+        <button class="header-btn" onclick="window.location.href='../python-course.html'">← До курсу</button>
+    </header>
+    <div class="container">
+        <div class="breadcrumb">🐍 Python курс > Урок 2</div>
+        <h1>📚 Урок 2: Змінні і типи даних</h1>
+        <div class="lesson-content">
+            <h2>Що таке змінна?</h2>
+            <p>
+                Змінна — це контейнер для зберігання даних. Уявіть, що це коробка, у якій ми можемо зберігати інформацію.
+            </p>
+            <div class="code-block">
+                <code>ім_я = "Іван"<br>вік = 13<br>зріст = 1.65</code>
+            </div>
+            <p>
+                Ось ми створили три змінні: ім_я, вік та зріст.
+            </p>
+
+            <h2>Типи даних</h2>
+            <p>У Python існує кілька основних типів даних:</p>
+            <ul>
+                <li><strong>String (рядок):</strong> текст, наприклад "Привіт"</li>
+                <li><strong>Integer (ціле число):</strong> числа без десяткової частини, наприклад 42</li>
+                <li><strong>Float (дійсне число):</strong> числа з десяткову частину, наприклад 3.14</li>
+                <li><strong>Boolean (логічне значення):</strong> True або False</li>
+            </ul>
+
+            <h2>Приклади змінних</h2>
+            <div class="code-block">
+                <code>назва_школи = "Школа №1"  # String<br>клас = 7            # Integer<br>оцінка = 4.5        # Float<br>здатен = True       # Boolean</code>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 Порада:</strong> Назви змінних повинні бути зрозумілими. Замість x, a, b, пишіть вік, ім_я, оцінка.
+            </div>
+
+            <h2>Операції зі змінними</h2>
+            <div class="code-block">
+                <code>a = 10<br>b = 5<br>сума = a + b         # 15<br>різниця = a - b      # 5<br>добуток = a * b      # 50</code>
+            </div>
+
+            <h2>Висновок</h2>
+            <p>Тепер ви знаєте про змінні та типи даних. Це основні будівельні блоки програмування!</p>
+
+            <div class="buttons">
+                <button class="btn btn-secondary" onclick="completeLesson(2)">✓ Позначити як завершено</button>
+                <button class="btn btn-primary" onclick="nextLesson(2)">Наступний урок →</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function completeLesson(num) {
+            let userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            if (!userData.completedLessons) userData.completedLessons = [];
+            if (!userData.completedLessons.includes(num)) {
+                userData.completedLessons.push(num);
+                localStorage.setItem('userData', JSON.stringify(userData));
+                alert('✓ Урок завершено!');
+            } else {
+                alert('Ви вже завершили цей урок!');
+            }
+        }
+        function nextLesson(num) {
+            completeLesson(num);
+            window.location.href = `lesson-${num + 1}.html`;
+        }
+    </script>
+</body>
+</html>
