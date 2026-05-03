@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Lingo - Тест 6:</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0f2c 0%, #1a1f4b 50%, #0f1535 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(15, 26, 70, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .header-btn {
+            padding: 10px 20px;
+            background: rgba(0, 102, 204, 0.2);
+            border: 1px solid rgba(0, 102, 204, 0.4);
+            border-radius: 8px;
+            color: #8899cc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .header-btn:hover {
+            background: rgba(0, 102, 204, 0.4);
+            color: #00b4ff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .test-header {
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .test-desc {
+            color: #8899cc;
+            font-size: 16px;
+        }
+
+        .question {
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .question-num {
+            color: #00b4ff;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .question-text {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 102, 204, 0.3);
+            border-radius: 8px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #8899cc;
+        }
+
+        .option:hover {
+            background: rgba(0, 102, 204, 0.2);
+            border-color: rgba(0, 102, 204, 0.6);
+        }
+
+        .option input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .option.selected {
+            background: rgba(0, 102, 204, 0.3);
+            border-color: #0066cc;
+            color: #00b4ff;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn-back {
+            background: rgba(0, 102, 204, 0.2);
+            border: 1px solid rgba(0, 102, 204, 0.4);
+            color: #8899cc;
+        }
+
+        .btn-back:hover {
+            background: rgba(0, 102, 204, 0.4);
+            color: #00b4ff;
+        }
+
+        .result {
+            display: none;
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-score {
+            font-size: 48px;
+            font-weight: 700;
+            color: #00b4ff;
+            margin-bottom: 15px;
+        }
+
+        .result-text {
+            color: #8899cc;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .code-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #00b4ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #00b4ff;
+            overflow-x: auto;
+        }
+
+        .code-box span {
+            color: inherit;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Light theme */
+        body.light-theme {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e7ff 50%, #f0f4ff 100%);
+            color: #1a1a1a;
+        }
+
+        body.light-theme header {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+        }
+
+        body.light-theme .header-btn {
+            background: rgba(0, 102, 204, 0.1);
+            color: #0066cc;
+            border-color: rgba(0, 102, 204, 0.3);
+        }
+
+        body.light-theme .test-header {
+            background: rgba(0, 102, 204, 0.08);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+
+        body.light-theme h1 {
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.light-theme .question {
+            background: rgba(0, 102, 204, 0.08);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+
+        body.light-theme .option {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+
+        body.light-theme .option.selected {
+            background: rgba(0, 102, 204, 0.2);
+            color: #0066cc;
+        }
+
+        body.light-theme .btn-submit {
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+        }
+
+        .text-input-container {
+            margin: 20px 0;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(0, 102, 204, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            background: rgba(0, 0, 0, 0.5);
+            border-color: #0066cc;
+            box-shadow: 0 0 10px rgba(0, 102, 204, 0.3);
+        }
+
+        body.light-theme .text-input {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+
+        body.light-theme .text-input:focus {
+            background: rgba(0, 0, 0, 0.08);
+            border-color: #0066cc;
+        }
+
+        /* Checkbox styles */
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(0, 102, 204, 0.5);
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            border-color: #00b4ff;
+        }
+
+        input[type="checkbox"]:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 102, 204, 0.4);
+        }
+
+        body.light-theme input[type="checkbox"] {
+            background: rgba(0, 102, 204, 0.1);
+            border-color: rgba(0, 102, 204, 0.3);
+        }
+
+        body.light-theme input[type="checkbox"]:checked {
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            border-color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-header" onclick="window.location.href='../index.html'">Code Lingo</div>
+        <button class="header-btn" onclick="window.location.href='../python-course.html'">← До курсу</button>
+    </header>
+
+    <div class="container">
+        <div class="test-header">
+            <h1>📝 Тест 6: Списки</h1>
+            <p class="test-desc">Перевіріть свої знання з Уроку 6. Вибирайте правильні відповіді.</p>
+        </div>
+
+        <div id="questions-container"></div>
+
+        <div class="buttons">
+            <button class="btn btn-submit" onclick="submitTest()">✓ Відправити відповіді</button>
+            <button class="btn btn-back" onclick="window.location.href='../python-course.html'">← Назад</button>
+        </div>
+
+        <div id="result" class="result">
+            <div class="result-score" id="score-text"></div>
+            <div class="result-text" id="result-message"></div>
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+                <button class="btn btn-submit" onclick="window.location.href='../python-course.html'">Повернутися до курсу</button>
+                <button class="btn btn-submit" style="background: rgba(0, 102, 204, 0.4);" onclick="resetTest()">🔄 Заново</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Завантаження теми
+        function loadTheme() {
+            const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+            if (settings.theme === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+        }
+
+        loadTheme();
+
+        // Перевірка авторизації
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            window.location.href = '../Registr.html';
+        }
+
+        function logout() {
+            if (confirm('Ви впевнені, що хочете вийти?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = '../Registr.html';
+            }
+        }
+
+        const questions = [
+            {
+                text: "Що таке список у Python?",
+                options: [
+                    "Команда для виводу тексту",
+                    "Тип даних для збереження декількох значень в одній змінній",
+                    "Математична операція",
+                    "Вид циклу",
+                ],
+                correct: 1
+            },
+            {
+                text: "Які дужки використовуються для створення списку?",
+                options: [
+                    "()",
+                    "{}",
+                    "[]",
+                ],
+                correct: 2
+            },
+            {
+                text: "З якого числа починається індексація у списку?",
+                options: [
+                    "1",
+                    "0",
+                    "-1",
+                    "10",
+                ],
+                correct: 1
+            },
+            {
+                text: "Що робить метод pop()?",
+                options: [
+                    "Додає елемент у кінець списку",
+                    "Видаляє та повертає останній елемент списку",
+                    "Видаляє перший елемент списку",
+                    "Повертає кількість елементів у списку",
+                ],
+                correct: 1
+            },
+            {
+                text: "Який метод видаляє елемент за значенням?",
+                options: [
+                    "clear()",
+                    "pop()",
+                    "delete()",
+                    "remove()",
+                ],
+                correct: 3
+            },
+            {
+                text: "Що виведе код? <div class='code-box'>numbers = [10, 20, 30]<br>print(len(numbers))</div>",
+                options: [
+                    "2",
+                    "3",
+                    "10",
+                    "Помилка",
+                ],
+                correct: 1
+            },
+            {
+                text: "Які типи даних можуть зберігатися у списку?",
+                options: [
+                    "Числа",
+                    "Лише числа",
+                    "Рядки",
+                    "Лише рядки",
+                ],
+                correct: [0, 2]
+            },
+            {
+                text: "Які з цих функцій можуть видаляти елементи з списку?",
+                options: [
+                    "push()",
+                    "pop()",
+                    "remove()",
+                    "len()",
+                ],
+                correct: [1, 2]
+            },
+            {
+                text: "Який метод додає елемент у кінець списку?",
+                options: [
+                    "add()",
+                    "push()",
+                    "append()",
+                    "insert()",
+                ],
+                correct: 2
+            },
+            {
+                text: "Як отримати перший елемент списку? <div class='code-box'>fruits = [\"яблуко\", \"банан\", \"груша\"]</div> ",
+                type: "text",
+                correct: "fruits[0]"
+            },
+            {
+                text: "Як видалити другий елемент списку? <div class='code-box'>fruits = [\"яблуко\", \"банан\", \"груша\"]</div> ",
+                type: "text",
+                correct: "del fruits[1]"
+            },
+            {
+                text: "Як додати елемент \"персик\" до списку? <div class='code-box'>fruits = [\"яблуко\", \"банан\", \"груша\"]</div> ",
+                type: "text",
+                correct: "fruits.append(\"персик\")"
+            }
+        ];
+
+        let userAnswers = new Array(questions.length).fill(-1);
+        let questionMapping = {}; // Отслеживаем соответствие между индексами
+
+        function shuffleArray(array) {
+            const shuffled = array.map((q, idx) => ({ ...q, originalIndex: idx }));
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function initTest() {
+            // Перемешиваем вопросы случайным образом
+            const shuffledQuestions = shuffleArray(questions);
+            const container = document.getElementById('questions-container');
+            shuffledQuestions.forEach((q, displayIdx) => {
+                const originalIdx = q.originalIndex;
+                questionMapping[originalIdx] = displayIdx;
+                let html = '';
+                if (q.type === 'text') {
+                    // Текстовое поле для ввода
+                    html = `
+                        <div class="question">
+                            <div class="question-num">Питання ${displayIdx + 1}</div>
+                            <div class="question-text">${q.text}</div>
+                            <div class="text-input-container">
+                                <input type="text" id="q${displayIdx}-input" class="text-input" placeholder="Введіть відповідь..." onchange="selectTextAnswer(${displayIdx}, this.value)">
+                            </div>
+                        </div>
+                    `;
+                } else if (Array.isArray(q.correct)) {
+                    // Checkboxes для вопросов с несколькими правильными ответами
+                    html = `
+                        <div class="question">
+                            <div class="question-num">Питання ${displayIdx + 1} (виберіть все правильні)</div>
+                            <div class="question-text">${q.text}</div>
+                            <div class="options">
+                                ${q.options.map((opt, optIdx) => `
+                                    <label class="option" onclick="selectMultipleAnswer(${displayIdx}, ${optIdx})">
+                                        <input type="checkbox" name="q${displayIdx}" value="${optIdx}" onchange="selectMultipleAnswer(${displayIdx}, ${optIdx})">
+                                        ${opt}
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Обычные radio buttons
+                    html = `
+                        <div class="question">
+                            <div class="question-num">Питання ${displayIdx + 1}</div>
+                            <div class="question-text">${q.text}</div>
+                            <div class="options">
+                                ${q.options.map((opt, optIdx) => `
+                                    <label class="option" onclick="selectAnswer(${displayIdx}, ${optIdx})">
+                                        <input type="radio" name="q${displayIdx}" value="${optIdx}" onchange="selectAnswer(${displayIdx}, ${optIdx})">
+                                        ${opt}
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = html;
+                container.appendChild(questionDiv.firstElementChild);
+            });
+        }
+
+        function selectAnswer(displayIdx, optIdx) {
+            const shuffledIdx = Object.keys(questionMapping).find(k => questionMapping[k] === displayIdx);
+            if (shuffledIdx !== undefined) {
+                userAnswers[shuffledIdx] = optIdx;
+            }
+            // Update UI
+            document.querySelectorAll(`label[onclick="selectAnswer(${displayIdx}, ${optIdx})"]`).forEach(label => {
+                label.classList.toggle('selected');
+            });
+            document.querySelectorAll(`[name="q${displayIdx}"]`).forEach((inp, i) => {
+                inp.parentElement.classList.toggle('selected', i === optIdx);
+            });
+        }
+
+        function selectTextAnswer(displayIdx, value) {
+            const shuffledIdx = Object.keys(questionMapping).find(k => questionMapping[k] === displayIdx);
+            if (shuffledIdx !== undefined) {
+                userAnswers[shuffledIdx] = value;
+            }
+        }
+
+        function selectMultipleAnswer(displayIdx, optIdx) {
+            const shuffledIdx = Object.keys(questionMapping).find(k => questionMapping[k] === displayIdx);
+            if (shuffledIdx !== undefined) {
+                if (!Array.isArray(userAnswers[shuffledIdx])) {
+                    userAnswers[shuffledIdx] = [];
+                }
+                const idx = userAnswers[shuffledIdx].indexOf(optIdx);
+                if (idx > -1) {
+                    userAnswers[shuffledIdx].splice(idx, 1);
+                } else {
+                    userAnswers[shuffledIdx].push(optIdx);
+                }
+                // Update UI
+                document.querySelectorAll(`[name="q${displayIdx}"]`).forEach((inp, i) => {
+                    inp.parentElement.classList.toggle('selected', userAnswers[shuffledIdx].includes(i));
+                });
+            }
+        }
+
+        function resetTest() {
+            userAnswers = new Array(questions.length).fill(-1);
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('.question').forEach(q => q.style.display = 'block');
+            document.querySelectorAll('.btn-submit:not([onclick="resetTest()"])').forEach(b => b.style.display = 'inline-block');
+            document.getElementById('result').classList.remove('show');
+        }
+
+        function submitTest() {
+            let score = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (questions[idx].type === 'text') {
+                    // Для текстовых вопросов сравниваем текст без пробелов
+                    const userText = String(ans).toLowerCase().replace(/\s/g, '');
+                    const correctText = String(questions[idx].correct).toLowerCase().replace(/\s/g, '');
+                    if (userText === correctText) {
+                        score++;
+                    }
+                } else if (Array.isArray(questions[idx].correct)) {
+                    // Для вопросов с несколькими правильными ответами
+                    const userAnswersArray = Array.isArray(ans) ? ans.sort((a, b) => a - b) : [];
+                    const correctAnswersArray = questions[idx].correct.sort((a, b) => a - b);
+                    if (userAnswersArray.length === correctAnswersArray.length && 
+                        userAnswersArray.every((val, i) => val === correctAnswersArray[i])) {
+                        score++;
+                    }
+                } else {
+                    // Для обычных вопросов с выбором
+                    if (ans === questions[idx].correct) {
+                        score++;
+                    }
+                }
+            });
+
+            const percentage = Math.round((score / questions.length) * 100);
+            const resultDiv = document.getElementById('result');
+            const scoreText = document.getElementById('score-text');
+            const resultMsg = document.getElementById('result-message');
+
+            scoreText.textContent = `${percentage}%`;
+            
+            if (percentage >= 80) {
+                resultMsg.textContent = '🎉 Чудово! Ви добре розумієте матеріал!';
+            } else if (percentage >= 60) {
+                resultMsg.textContent = '✓ Хороший результат! Pero потрібно потренуватися.';
+            } else {
+                resultMsg.textContent = '📚 Рекомендуємо переглянути матеріал і спробувати ще раз.';
+            }
+
+            // Save grade and mark test as completed if passed
+            let userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            if (!userData.grades) userData.grades = {};
+            userData.grades.test6 = percentage;
+            
+            // Якщо оцінка >= 60%, позначити тест і урок як пройдені
+            if (percentage >= 60) {
+                if (!userData.completedTests) userData.completedTests = [];
+                if (!userData.completedTests.includes(6)) {
+                    userData.completedTests.push(6);
+                }
+                if (!userData.completedLessons) userData.completedLessons = [];
+                if (!userData.completedLessons.includes(6)) {
+                    userData.completedLessons.push(6);
+                }
+            }
+            
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            resultDiv.classList.add('show');
+            document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+            document.querySelectorAll('.btn-submit').forEach(b => b.style.display = 'none');
+        }
+
+        window.addEventListener('load', initTest);
+    </script>
+</body>
+</html>
