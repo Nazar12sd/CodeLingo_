@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Lingo - Вхід та Реєстрація</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0f2c 0%, #1a1f4b 50%, #0f1535 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 102, 204, 0.2);
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 102, 204, 0.2);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: #8899cc;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-btn.active {
+            color: #00b4ff;
+            border-bottom-color: #0066cc;
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: #00b4ff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8899cc;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #0066cc;
+            background: rgba(0, 102, 204, 0.15);
+            box-shadow: 0 0 15px rgba(0, 102, 204, 0.2);
+        }
+
+        input::placeholder {
+            color: #5566aa;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+
+        .message.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #fca5a5;
+            display: block;
+        }
+
+        .message.success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #86efac;
+            display: block;
+        }
+
+        .info-text {
+            text-align: center;
+            color: #8899cc;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        .divider {
+            text-align: center;
+            color: #8899cc;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 38px;
+            background: none;
+            border: none;
+            color: #8899cc;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .toggle-btn:hover {
+            color: #00b4ff;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 25px;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
+            .tabs {
+                margin-bottom: 20px;
+            }
+
+            .tab-btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo">Code Lingo</div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('login')">Вхід</button>
+                <button class="tab-btn" onclick="switchTab('register')">Реєстрація</button>
+            </div>
+
+            <!-- ВХІД -->
+            <div id="login" class="tab-content active">
+                <div id="loginMessage" class="message"></div>
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" required placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group password-toggle">
+                        <label for="loginPassword">Пароль:</label>
+                        <input type="password" id="loginPassword" required placeholder="••••••••">
+                        <button type="button" class="toggle-btn" onclick="togglePassword('loginPassword')">👁️</button>
+                    </div>
+
+                    <button type="submit" class="btn">✓ Увійти</button>
+                </form>
+
+                <div class="info-text">
+                    Немаєте облікового запису? <a href="#" onclick="switchTab('register')" style="color: #00b4ff; text-decoration: none;">Зареєструйтесь</a>
+                </div>
+            </div>
+
+            <!-- РЕЄСТРАЦІЯ -->
+            <div id="register" class="tab-content">
+                <div id="registerMessage" class="message"></div>
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="registerName">Ім'я:</label>
+                        <input type="text" id="registerName" required placeholder="Ваше ім'я">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" id="registerEmail" required placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group password-toggle">
+                        <label for="registerPassword">Пароль:</label>
+                        <input type="password" id="registerPassword" required placeholder="••••••••">
+                        <button type="button" class="toggle-btn" onclick="togglePassword('registerPassword')">👁️</button>
+                    </div>
+
+                    <div class="form-group password-toggle">
+                        <label for="registerPasswordConfirm">Підтвердьте пароль:</label>
+                        <input type="password" id="registerPasswordConfirm" required placeholder="••••••••">
+                        <button type="button" class="toggle-btn" onclick="togglePassword('registerPasswordConfirm')">👁️</button>
+                    </div>
+
+                    <button type="submit" class="btn">✓ Зареєструватися</button>
+                </form>
+
+                <div class="info-text">
+                    Вже маєте аккаунт? <a href="#" onclick="switchTab('login')" style="color: #00b4ff; text-decoration: none;">Увійдіть</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Переключення між вкладками
+        function switchTab(tab) {
+            // Приховати всі вкладки
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            // Показати вибрану вкладку
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Перемикання видимості пароля
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            field.type = field.type === 'password' ? 'text' : 'password';
+        }
+
+        // Функція для показу повідомлень
+        function showMessage(elementId, message, type) {
+            const msgElement = document.getElementById(elementId);
+            msgElement.textContent = message;
+            msgElement.className = `message ${type}`;
+            setTimeout(() => {
+                msgElement.classList.remove(type);
+                msgElement.textContent = '';
+            }, 5000);
+        }
+
+        // Валідація Email
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        // Вхід
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            // Валідація
+            if (!isValidEmail(email)) {
+                showMessage('loginMessage', '❌ Введіть коректний email', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showMessage('loginMessage', '❌ Пароль має мати мінімум 6 символів', 'error');
+                return;
+            }
+
+            // Отримати користувачів з localStorage
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (!user) {
+                showMessage('loginMessage', '❌ Email або пароль невірні', 'error');
+                return;
+            }
+
+            // Успішний вхід
+            showMessage('loginMessage', '✓ Ви успішно увійшли!', 'success');
+            
+            // Зберегти активного користувача
+            localStorage.setItem('currentUser', JSON.stringify({
+                email: user.email,
+                name: user.name,
+                registeredAt: user.registeredAt
+            }));
+
+            // Перенаправити на головну
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
+
+        // Реєстрація
+        function handleRegister(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('registerName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+
+            // Валідація
+            if (name.length < 2) {
+                showMessage('registerMessage', '❌ Ім\'я має мати мінімум 2 символи', 'error');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showMessage('registerMessage', '❌ Введіть коректний email', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showMessage('registerMessage', '❌ Пароль має мати мінімум 6 символів', 'error');
+                return;
+            }
+
+            if (password !== passwordConfirm) {
+                showMessage('registerMessage', '❌ Паролі не збігаються', 'error');
+                return;
+            }
+
+            // Отримати користувачів
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+            // Перевірити чи існує такий email
+            if (users.find(u => u.email === email)) {
+                showMessage('registerMessage', '❌ Цей email вже зареєстрований', 'error');
+                return;
+            }
+
+            // Додати нового користувача
+            const newUser = {
+                email: email,
+                password: password,
+                name: name,
+                registeredAt: new Date().toISOString()
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+
+            showMessage('registerMessage', '✓ Реєстрація успішна! Переходимо до входу...', 'success');
+
+            // Очистити форму
+            document.querySelector('form').reset();
+
+            // Перейти на вкладку входу
+            setTimeout(() => {
+                switchTab('login');
+            }, 1500);
+        }
+
+        // Перевірити чи користувач вже залогіний
+        window.addEventListener('load', () => {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

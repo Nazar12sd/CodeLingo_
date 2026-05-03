@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Lingo - Профіль</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0f2c 0%, #1a1f4b 50%, #0f1535 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(15, 26, 70, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .header-btn {
+            padding: 10px 20px;
+            background: rgba(0, 102, 204, 0.2);
+            border: 1px solid rgba(0, 102, 204, 0.4);
+            border-radius: 8px;
+            color: #8899cc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .header-btn:hover {
+            background: rgba(0, 102, 204, 0.4);
+            color: #00b4ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .profile-header {
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 0 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .user-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #00b4ff;
+        }
+
+        .user-email {
+            color: #8899cc;
+            margin-bottom: 20px;
+        }
+
+        .user-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat {
+            background: rgba(0, 61, 130, 0.3);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00b4ff;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #8899cc;
+            text-transform: uppercase;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: #00b4ff;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(0, 102, 204, 0.3);
+            padding-bottom: 15px;
+        }
+
+        /* Таблиця оцінок */
+        .grades-table {
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: rgba(0, 102, 204, 0.2);
+            padding: 15px;
+            text-align: left;
+            color: #00b4ff;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(0, 102, 204, 0.3);
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+            color: #8899cc;
+        }
+
+        tr:hover {
+            background: rgba(0, 102, 204, 0.1);
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .grade-excellent {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            border: 1px solid #22c55e;
+        }
+
+        .grade-good {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+            border: 1px solid #3b82f6;
+        }
+
+        .grade-average {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fde047;
+            border: 1px solid #fbbf24;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #8899cc;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .profile-header {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        /* Light theme */
+        body.light-theme {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e7ff 50%, #f0f4ff 100%);
+            color: #1a1a1a;
+        }
+
+        body.light-theme header {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+        }
+
+        body.light-theme .header-btn {
+            background: rgba(0, 102, 204, 0.1);
+            color: #0066cc;
+            border-color: rgba(0, 102, 204, 0.3);
+        }
+
+        body.light-theme .header-btn:hover {
+            background: rgba(0, 102, 204, 0.2);
+        }
+
+        body.light-theme .profile-header {
+            background: rgba(0, 102, 204, 0.08);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+
+        body.light-theme .profile-header h1 {
+            color: #0066cc;
+        }
+
+        body.light-theme .stats {
+            background: rgba(0, 102, 204, 0.08);
+        }
+
+        body.light-theme .stat-box {
+            border-color: rgba(0, 102, 204, 0.2);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        body.light-theme .stat-box .stat-number {
+            color: #0066cc;
+        }
+
+        body.light-theme .btn {
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+        }
+
+        /* Стилі для таблиці оцінок з графіком */
+        .score-chart-section {
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .score-chart-wrapper {
+            position: relative;
+            overflow-x: auto;
+            margin-top: 20px;
+            min-height: 520px;
+        }
+
+        .score-chart-table {
+            width: max-content;
+            min-width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            margin: 0 auto;
+            background: rgba(0, 102, 204, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 102, 204, 0.1);
+        }
+
+        .score-chart-table th,
+        .score-chart-table td {
+            padding: 10px 12px;
+            text-align: center;
+            border: 1px solid rgba(0, 102, 204, 0.2);
+            font-size: 12px;
+            min-width: 90px;
+            background: transparent;
+        }
+
+        .score-chart-table th:hover,
+        .score-chart-table td:hover {
+            background: rgba(0, 102, 204, 0.1);
+        }
+
+        .score-chart-table th {
+            background: rgba(0, 102, 204, 0.2);
+            color: #00b4ff;
+            font-weight: 600;
+        }
+
+        .grade-column {
+            width: 100px;
+            min-width: 100px;
+            padding: 10px 12px;
+            font-size: 12px;
+        }
+
+        .lesson-column {
+            width: 110px;
+            min-width: 110px;
+            padding: 10px 12px;
+            font-size: 12px;
+        }
+
+        .lesson-column:hover {
+            background: rgba(0, 102, 204, 0.18) !important;
+        }
+
+        .grade-label {
+            font-weight: 600;
+            color: #8899cc;
+        }
+
+        .chart-cell {
+            position: relative;
+            width: 110px;
+            height: 36px;
+            background: transparent;
+        }
+
+        .chart-point {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: #00b4ff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 6px rgba(0, 180, 255, 0.6);
+        }
+
+        .score-chart-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-header" onclick="window.location.href='index.html'">Code Lingo</div>
+        <div>
+            <button class="header-btn" onclick="window.location.href='index.html'">← Назад</button>
+            <button class="header-btn" onclick="logout()" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); margin-left: 10px;">🚪 Вихід</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>👤 Мій Профіль</h1>
+
+        <!-- Профіль користувача -->
+        <div class="profile-header">
+            <div class="avatar">👨‍💻</div>
+            <div class="user-name" id="user-name">Завантаження...</div>
+            <div class="user-email" id="user-email">Завантаження...</div>
+
+            <div class="user-stats">
+                <div class="stat">
+                    <div class="stat-value" id="total-lessons">0</div>
+                    <div class="stat-label">Уроків</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="total-tests">0</div>
+                    <div class="stat-label">Тестів</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="total-points">0</div>
+                    <div class="stat-label">Балів</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="avg-grade">-</div>
+                    <div class="stat-label">Середня оцінка</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Оцінки -->
+        <div class="section">
+            <h2>📊 Оцінки з Python</h2>
+            <div class="grades-table">
+                <table id="grades-table">
+                    <thead>
+                        <tr>
+                            <th>Урок</th>
+                            <th>Тест</th>
+                            <th>Оцінка</th>
+                            <th>Дата</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grades-body">
+                        <tr>
+                            <td colspan="4" class="no-data">Поки немає жодних оцінок. Почніть вивчати!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Графік оцінок -->
+        <div class="score-chart-section">
+            <h2 style="margin-bottom: 15px;">📊 Графік оцінок</h2>
+            <div class="score-chart-wrapper" id="score-chart-wrapper">
+                <table class="score-chart-table">
+                    <thead>
+                        <tr>
+                            <th class="grade-column">Оцінка</th>
+                            <th class="lesson-column">Урок 1</th>
+                            <th class="lesson-column">Урок 2</th>
+                            <th class="lesson-column">Урок 3</th>
+                            <th class="lesson-column">Урок 4</th>
+                            <th class="lesson-column">Урок 5</th>
+                            <th class="lesson-column">Урок 6</th>
+                            <th class="lesson-column">Урок 7</th>
+                            <th class="lesson-column">Урок 8</th>
+                        </tr>
+                    </thead>
+                    <tbody id="score-chart-body">
+                        <!-- Рядки будуть додані JavaScript -->
+                    </tbody>
+                </table>
+                <svg id="score-chart-svg" class="score-chart-svg"></svg>
+            </div>
+        </div>
+
+        <!-- Статистика -->
+        <div class="section">
+            <h2>📈 Статистика</h2>
+            <div style="background: rgba(0, 102, 204, 0.1); border: 1px solid rgba(0, 102, 204, 0.3); border-radius: 15px; padding: 20px;">
+                <p style="margin-bottom: 15px;">
+                    <strong>Дата реєстрації:</strong> <span id="created-date">27.04.2026</span>
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <strong>Вивчувана мова:</strong> Python 🐍
+                </p>
+                <p>
+                    <strong>Прогрес:</strong> <span id="progress">0%</span>
+                </p>
+            </div>
+        </div>
+
+        <button class="btn" onclick="window.location.href='index.html'" style="margin-top: 40px;">← Назад на головну</button>
+    </div>
+
+    <script>
+        // Завантаження теми
+        function loadTheme() {
+            const settings = JSON.parse(localStorage.getItem('settings') || '{}');
+            if (settings.theme === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+        }
+
+        // Перевірка авторизації та завантаження дані користувача
+        window.addEventListener('load', () => {
+            loadTheme();
+            
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'Registr.html';
+                return;
+            }
+
+            const user = JSON.parse(currentUser);
+            document.getElementById('user-name').textContent = user.name || 'Користувач';
+            document.getElementById('user-email').textContent = user.email || 'email@example.com';
+
+            // Дата реєстрації
+            if (user.registeredAt) {
+                const date = new Date(user.registeredAt);
+                document.getElementById('created-date').textContent = date.toLocaleDateString('uk-UA');
+            }
+
+            const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            
+            const completedLessons = userData.completedLessons ? userData.completedLessons.length : 0;
+            const grades = userData.grades ? Object.values(userData.grades).flat() : [];
+            
+            document.getElementById('total-lessons').textContent = completedLessons;
+            document.getElementById('total-tests').textContent = Math.floor(completedLessons / 2);
+            document.getElementById('total-points').textContent = completedLessons * 10;
+
+            // Середня оцінка
+            if (grades.length > 0) {
+                const avgGrade = (grades.reduce((a, b) => a + b, 0) / grades.length).toFixed(1);
+                document.getElementById('avg-grade').textContent = avgGrade;
+            }
+
+            // Прогрес
+            const progress = Math.min((completedLessons / 8) * 100, 100).toFixed(0);
+            document.getElementById('progress').textContent = progress + '%';
+
+            // Таблиця оцінок
+            if (grades.length > 0) {
+                const gradesBody = document.getElementById('grades-body');
+                gradesBody.innerHTML = '';
+
+                grades.forEach((grade, idx) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>Урок ${idx + 1}</td>
+                        <td>Тест ${idx + 1}</td>
+                        <td>
+                            <span class="grade-badge ${getGradeBadgeClass(grade)}">
+                                ${grade}/100
+                            </span>
+                        </td>
+                        <td>${new Date().toLocaleDateString('uk-UA')}</td>
+                    `;
+                    gradesBody.appendChild(row);
+                });
+            }
+
+            const lessonGrades = getLessonGrades(userData.grades || {});
+            renderScoreChart(lessonGrades);
+        });
+
+        function getLessonGrades(gradesObj) {
+            const lessonKeys = ['test1', 'test2', 'test3', 'test4', 'test5', 'test6', 'test7', 'test8'];
+            return lessonKeys.map(key => {
+                const value = gradesObj[key];
+                return typeof value === 'number' ? Math.round((value / 100) * 12) : null;
+            });
+        }
+
+        function renderScoreChart(lessonGrades) {
+            const chartBody = document.getElementById('score-chart-body');
+            const svg = document.getElementById('score-chart-svg');
+            const wrapper = document.getElementById('score-chart-wrapper');
+
+            chartBody.innerHTML = '';
+
+            for (let grade = 12; grade >= 0; grade--) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td class="grade-label grade-column">${grade}</td>` +
+                    lessonGrades.map((value, lessonIndex) => `<td class="chart-cell lesson-column" data-lesson="${lessonIndex}" data-grade="${grade}"></td>`).join('');
+                chartBody.appendChild(row);
+            }
+
+            svg.innerHTML = '';
+
+            const table = chartBody.closest('table');
+            const tableRect = table.getBoundingClientRect();
+            const wrapperRect = wrapper.getBoundingClientRect();
+
+            svg.style.width = `${tableRect.width}px`;
+            svg.style.height = `${wrapperRect.height}px`;
+            svg.setAttribute('width', tableRect.width);
+            svg.setAttribute('height', wrapperRect.height);
+            svg.setAttribute('viewBox', `0 0 ${tableRect.width} ${wrapperRect.height}`);
+            svg.setAttribute('preserveAspectRatio', 'none');
+
+            const pointPositions = [];
+
+            lessonGrades.forEach((value, index) => {
+                if (value === null) return;
+                const cell = chartBody.querySelector(`td[data-lesson="${index}"][data-grade="${value}"]`);
+                if (!cell) return;
+                const cellRect = cell.getBoundingClientRect();
+                const x = cellRect.left + cellRect.width / 2 - wrapperRect.left + wrapper.scrollLeft;
+                const y = cellRect.top + cellRect.height / 2 - wrapperRect.top;
+
+                const point = document.createElement('span');
+                point.className = 'chart-point';
+                cell.appendChild(point);
+                pointPositions.push({ x, y });
+            });
+
+            if (pointPositions.length > 1) {
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', createSmoothPath(pointPositions));
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', '#00b4ff');
+                path.setAttribute('stroke-width', '3');
+                path.setAttribute('stroke-linecap', 'round');
+                path.setAttribute('stroke-linejoin', 'round');
+                path.setAttribute('opacity', '0.9');
+                svg.appendChild(path);
+            }
+        }
+
+        function createSmoothPath(points) {
+            if (!points.length) return '';
+            if (points.length === 1) return `M ${points[0].x} ${points[0].y}`;
+
+            const path = [`M ${points[0].x} ${points[0].y}`];
+
+            for (let i = 0; i < points.length - 1; i++) {
+                const p0 = points[i];
+                const p1 = points[i + 1];
+                const pPrev = points[i - 1] || p0;
+                const pNext = points[i + 2] || p1;
+
+                const cp1x = p0.x + (p1.x - pPrev.x) / 6;
+                const cp1y = p0.y + (p1.y - pPrev.y) / 6;
+                const cp2x = p1.x - (pNext.x - p0.x) / 6;
+                const cp2y = p1.y - (pNext.y - p0.y) / 6;
+
+                path.push(`C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${p1.x} ${p1.y}`);
+            }
+
+            return path.join(' ');
+        }
+
+        function logout() {
+            if (confirm('Ви впевнені, що хочете вийти?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'Registr.html';
+            }
+        }
+
+        function getGradeBadgeClass(grade) {
+            if (grade >= 80) return 'grade-excellent';
+            if (grade >= 60) return 'grade-good';
+            return 'grade-average';
+        }
+    </script>
+</body>
+</html>
