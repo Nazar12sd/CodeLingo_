@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Lingo - Урок 6: Списки (list) у Python</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0f2c 0%, #1a1f4b 50%, #0f1535 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(15, 26, 70, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 102, 204, 0.2);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            z-index: 1000;
+            top: 0;
+        }
+
+        .logo-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .header-btn {
+            padding: 10px 20px;
+            background: rgba(0, 102, 204, 0.2);
+            border: 1px solid rgba(0, 102, 204, 0.4);
+            border-radius: 8px;
+            color: #8899cc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .header-btn:hover {
+            background: rgba(0, 102, 204, 0.4);
+            color: #00b4ff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .breadcrumb {
+            color: #8899cc;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .h1_yellow {
+            font-size: 36px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #cc8500, #ffa600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .lesson-content {
+            background: rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(0, 102, 204, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #00b4ff;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .h2_yellow {
+            font-size: 30px;
+            color: #ebb124;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .h2_purple {
+            font-size: 30px;
+            color: #ba1ca9;
+            margin-bottom: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #00b4ff;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        .h2_level_1 {
+            font-size: 20px;
+            color: #00d9ff;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        h2:first-child {
+            margin-top: 0;
+        }
+
+        p {
+            color: #8899cc;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .p_bold {
+            color: #8899cc;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .p_bold_red {
+            color: #bb0d0d;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .p_bold_green {
+            color: #15b82b;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .p_yellow {
+            color: #ccba88;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .code_white {
+            color: #ffffff;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .code_yellow {
+            color: #ebb124;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .code_red {
+            color: #ff6b6b;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .code_green {
+            color: #1cba6b;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .code_purple {
+            color: #ba1ca9;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .code-white {
+            display: block;
+            margin: 30px 0;
+        }
+
+        .code-white code {
+            display: block;
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #00b4ff;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;          /* ВАЖНО: одинаковая ширина колонок */
+        }
+        
+        .info-table th,
+        .info-table td {
+            border: 1px solid #4da3ff;
+            padding: 12px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        
+        .info-table th {
+            background: #1a1f4b;
+        }
+        
+        /* Самое важное */
+        .info-table code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            display: block;
+        }
+        
+        /* Делаем ширину колонок */
+        .info-table th:first-child,
+        .info-table td:first-child {
+            width: 45%;
+        }
+
+        .info-table th:last-child,
+        .info-table td:last-child {
+            width: 55%;
+        }
+        
+        .error {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid #22c55e;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            color: #86efac;
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 30px;
+            color: #8899cc;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0066cc, #00b4ff);
+            color: white;
+            box-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(0, 102, 204, 0.2);
+            border: 1px solid rgba(0, 102, 204, 0.4);
+            color: #8899cc;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 102, 204, 0.4);
+            color: #00b4ff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .lesson-content {
+                padding: 20px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+        .indent {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-header" onclick="window.location.href='../index.html'">Code Lingo</div>
+        <div>
+            <button class="header-btn" onclick="window.location.href='../python-course.html'">← До курсу</button>
+            <button class="header-btn" onclick="logout()" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.4); margin-left: 10px;">🚪 Вихід</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">🐍 Python курс > Урок 6</div>
+        <h1>📚 Урок 6: Списки (list) у Python</h1>
+
+        <div class="lesson-content">
+            <h2>Що таке список?</h2>
+
+            <p>Список (<span class="p_yellow">list</span>) - це тип даних, який дозволяє зберігати декілька значень в одній змінній. Наприклад, якщо потрібно зберегти 5 чисел — не потрібно створювати 5 змінних.</p>
+            <p><span class="p_bold">Замість цього використовується список:</span></p>
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]
+                </code>
+            </div>
+            <p>В цьому прикладі <code>my_list</code> - це список, який містить п'ять елементів: 1, 2, 3, 4 та 5.</p>
+
+            <h2>Створення списку</h2>
+
+            <p>Список створюється за допомогою квадратних дужок []. Елементи списку розділяються комами.</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">numbers</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_yellow">fruits</span> = [<span class="code_green">"Яблоко"</span>, <span class="code_green">"Банан"</span>, <span class="code_green">"Апельсин"</span>, <span class="code_green">"Груша"</span>, <span class="code_green">"Киві"</span>]
+                </code>
+            </div>
+            <p><span class="p_bold">У списку можуть бути:</span>
+                <ul>
+                    <li>Числа (цілі та з плаваючою крапкою)</li>
+                    <li>Рядки (текст в лапках)</li>
+                    <li>Булеві значення (<code><span class="code_green">True</span></code> або <code><span class="code_red">False</span></code>)</li>
+                    <li>Навіть змішані типи</li>
+                </ul>
+            </p>
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">mixed</span> = [<span class="code_green">10</span>, <span class="code_green">"привіт"</span>, <span class="code_green">3.14</span>]
+                </code>
+            </div>
+
+            <h2>Індекси у списку</h2>
+
+            <p>Кожен елемент у списку має свій індекс, який використовується для доступу до нього. Нумерація починається з 0.</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_yellow">first_element</span> = <span class="code_yellow">my_list</span>[<span class="code_green">0</span>]  <span class="code_comment"># 1</span><br>
+                    <span class="code_yellow">last_element</span> = <span class="code_yellow">my_list</span>[<span class="code_green">4</span>]   <span class="code_comment"># 5</span>
+                </code>
+            </div>
+            <p>Також можна використовувати від'ємні індекси для доступу до елементів з кінця списку:</p>
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_yellow">last_element</span> = <span class="code_yellow">my_list</span>[<span class="code_red">-1</span>]  <span class="code_comment"># 5</span><br>
+                    <span class="code_yellow">second_last</span> = <span class="code_yellow">my_list</span>[<span class="code_red">-2</span>]  <span class="code_comment"># 4</span>
+                </code>
+            </div> 
+            
+            <h2>Зміна елемента списку</h2>
+
+            <p> Елемент можна змінити за індексом. Наприклад, щоб змінити перший елемент списку:</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_yellow">my_list</span>[<span class="code_green">0</span>] = <span class="code_green">10</span>  <span class="code_comment"># Змінюємо перший елемент</span>
+                </code>
+            </div>
+            <p><span class="p_bold">Результат:</span></p>
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">10</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]
+                </code>
+            </div>
+
+            <h2>Довжина списку — функція <span class="h2_purple">len</span>()</h2>
+
+            <p>Щоб дізнатися кількість елементів у списку, використовується функція <code><span class="code_purple">len</span>()</code>.</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_yellow">length</span> = <span class="code_purple">len</span>(<span class="code_yellow">my_list</span>)  <span class="code_comment"># 5</span>
+                </code>
+            </div>
+            <p><span class="p_bold">Вивід:</span></p>
+            <div class="code-white">
+                <code>
+                    5
+                </code>
+            </div>
+
+            <h2>Перебір списку циклом <span class="h2_yellow">for</span></h2>
+
+            <p>Щоб виконати дію для кожного елемента списку, використовується цикл <code><span class="code_purple">for</span></code>.</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_purple">for</span> <span class="code_yellow">element</span> <span class="code_purple">in</span> <span class="code_yellow">my_list</span>:<br>
+                    &nbsp;&nbsp;<span class="code_purple">print</span>(<span class="code_yellow">element</span>)
+                </code>
+            </div>
+            <p><span class="p_bold">Вивід:</span></p>
+            <div class="code-white">
+                <code>
+                    1<br>
+                    2<br>
+                    3<br>
+                    4<br>
+                    5
+                </code>
+            </div>
+
+            <h2>Додавання елемента — <span class="h2_purple">append</span>()</h2>
+
+            <p>Щоб додати новий елемент в кінець списку, використовується метод <code><span class="code_purple">append</span>()</code>.</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_yellow">my_list</span>.<span class="code_purple">append</span>(<span class="code_green">6</span>)  <span class="code_comment"># Додаємо новий елемент в кінець списку</span>
+                </code>
+            </div>
+            <p><span class="p_bold">Результат:</span></p>
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>, <span class="code_green">6</span>]
+                </code>
+            </div>
+
+            <h2>Видалення елемента — <span class="h2_purple">remove</span>()</h2>
+
+            <p>Щоб видалити елемент зі списку за значенням, використовується метод <code><span class="code_purple">remove</span>()</code>.</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_yellow">my_list</span>.<span class="code_purple">remove</span>(<span class="code_green">3</span>)  <span class="code_comment"># Видаляємо елемент зі значенням 3</span>
+                </code>
+            </div>
+            <p><span class="p_bold">Результат:</span></p>
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]
+                </code>
+            </div>
+
+            <h2>Видалення останнього елемента — <span class="h2_purple">pop</span>()</h2>
+
+            <p>Щоб видалити останній елемент зі списку, використовується метод <code><span class="code_purple">pop</span>()</code>.</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_yellow">my_list</span>.<span class="code_purple">pop</span>()  <span class="code_comment"># Видаляємо останній елемент</span>
+                </code>
+            </div>
+            <p><span class="p_bold">Результат:</span></p>
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>]
+                </code>
+            </div>
+
+            <h2>Видалення елемента за індексом — <span class="h2_purple">del</span></h2>
+
+            <p>Щоб видалити елемент зі списку за індексом, використовується оператор <code><span class="code_purple">del</span></code>.</p>
+
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">3</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]<br>
+                    <span class="code_purple">del</span> <span class="code_yellow">my_list</span>[<span class="code_green">2</span>]  <span class="code_comment"># Видаляємо елемент з індексом 2</span>
+                </code>
+            </div>
+            <p><span class="p_bold">Результат:</span></p>
+            <div class="code-white">
+                <code>
+                    <span class="code_yellow">my_list</span> = [<span class="code_green">1</span>, <span class="code_green">2</span>, <span class="code_green">4</span>, <span class="code_green">5</span>]
+                </code>
+            </div>
+
+            <div class="info-box">
+                <strong>💡 Запам'ятай:</strong> Команди для роботи зі списками:
+                <ul>
+                    <li><span class="code_yellow">len()</span> — повертає кількість елементів у списку</li>
+                    <li><span class="code_yellow">append()</span> — додає елемент до кінця списку</li>
+                    <li><span class="code_yellow">remove()</span> — видаляє елемент за значенням</li>
+                    <li><span class="code_yellow">pop()</span> — видаляє елемент за індексом</li>
+                    <li><span class="code_yellow">del</span> — видаляє елемент за індексом</li>
+                </ul>
+            </div>
+
+            <div class="buttons">
+                <button class="btn btn-primary" onclick="window.location.href='test-6.html'">Перейти до тестування</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Перевірка авторизації
+        const currentUser = localStorage.getItem('currentUser');
+        if (!currentUser) {
+            window.location.href = '../Registr.html';
+        }
+
+        function logout() {
+            if (confirm('Ви впевнені, що хочете вийти?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = '../Registr.html';
+            }
+        }
+
+        function completeLesson(lessonNum, nextPageId) {
+            let userData = JSON.parse(localStorage.getItem('userData') || '{}');
+            if (!userData.completedLessons) userData.completedLessons = [];
+            
+            if (!userData.completedLessons.includes(lessonNum)) {
+                userData.completedLessons.push(lessonNum);
+                localStorage.setItem('userData', JSON.stringify(userData));
+                alert('✓ Урок завершено! Тепер ви можете пройти тест.');
+                
+                // Оновити python-course.html
+                window.location.href = '../python-course.html';
+            } else {
+                alert('Ви вже завершили цей урок!');
+            }
+        }
+    </script>
+</body>
+</html>
